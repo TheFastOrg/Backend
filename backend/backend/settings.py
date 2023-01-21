@@ -25,7 +25,10 @@ SECRET_KEY = "django-insecure-9n$j0#l-fb*-q#hqq+b&0e+c14e0b*7s@^x1yfj13$6thb4uir
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = [
+    'https://*'
+]
 
 
 # Application definition
@@ -38,6 +41,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "enumfields", 
+    "ba7besh",
+    'rest_framework',
+    
 ]
 
 MIDDLEWARE = [
@@ -77,9 +83,9 @@ WSGI_APPLICATION = "backend.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
-        'USER': 'mydatabaseuser',
-        'PASSWORD': 'mypassword',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'password',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
