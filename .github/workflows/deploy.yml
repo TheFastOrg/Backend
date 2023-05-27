@@ -28,16 +28,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
 
-      - name: Configure AWS credentials
-        run: |
-          aws configure set region ${{ env.AWS_REGION }}
-          export AWS_ROLE_ARN=${{ secrets.AWS_ROLE_ARN }} # To Be Created
-          export AWS_WEB_IDENTITY_TOKEN_FILE=$(mktemp)
-          echo -n "${{ secrets.GITHUB_TOKEN }}" > $AWS_WEB_IDENTITY_TOKEN_FILE
-          aws sts assume-role-with-web-identity --role-arn $AWS_ROLE_ARN --role-session-name GitHubActionsSession --web-identity-token file://$AWS_WEB_IDENTITY_TOKEN_FILE > assume-role-output.json
-          export AWS_ACCESS_KEY_ID=$(jq -r '.Credentials.AccessKeyId' assume-role-output.json)
-          export AWS_SECRET_ACCESS_KEY=$(jq -r '.Credentials.SecretAccessKey' assume-role-output.json)
-          export AWS_SESSION_TOKEN=$(jq -r '.Credentials.SessionToken' assume-role-output.json)
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@e1e17a757e536f70e52b5a12b2e8d1d1c60e04ef # pin@v2
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          role-session-name: "GitHubActionsSession"
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Build and deploy CDK stack
         run: |
