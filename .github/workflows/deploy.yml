@@ -31,12 +31,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
 
-      # - name: Configure aws credentials
-      #   uses: aws-actions/configure-aws-credentials@e1e17a757e536f70e52b5a12b2e8d1d1c60e04ef # pin@v2
-      #   with:
-      #     role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-      #     role-session-name: "GitHubActionsSession"
-      #     aws-region: ${{ env.AWS_REGION }}
       - name: Configure AWS credentials
         run: |
           aws configure set aws_access_key_id ${{ env.AWS_ACCESS_KEY_ID }}
