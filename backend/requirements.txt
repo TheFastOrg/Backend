@@ -1,6 +1,7 @@
-django
-django-enumfields
-djangorestframework
+Django==4.1.5
+django-enumfields==2.1.1
+djangorestframework==3.14.0
 psycopg2==2.9.3
 gunicorn
 pyyaml
+uritemplate==4.1.1
