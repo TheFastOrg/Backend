@@ -26,7 +26,8 @@ SECRET_KEY = "django-insecure-9n$j0#l-fb*-q#hqq+b&0e+c14e0b*7s@^x1yfj13$6thb4uir
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["https://*"]
+# trusted origin for aws app runner
+CSRF_TRUSTED_ORIGINS = ["https://irqmnmh6v4.eu-central-1.awsapprunner.com"]
 
 
 # Application definition
