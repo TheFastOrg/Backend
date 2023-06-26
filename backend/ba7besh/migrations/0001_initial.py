@@ -125,12 +125,6 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "type",
-                    enumfields.fields.EnumField(
-                        enum=ba7besh.models.LikeType, max_length=255
-                    ),
-                ),
-                (
                     "review",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE, to="ba7besh.review"

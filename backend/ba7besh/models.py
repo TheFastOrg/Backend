@@ -6,7 +6,6 @@ from enum import Enum
 
 
 class BaseModel(models.Model):
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(default=None, null=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
@@ -30,11 +29,6 @@ class Business(BaseModel):
         return self.location.y
 
 
-class LikeType(Enum):
-    UPVOTE = 'upvote'
-    DOWNVOTE = 'downvote'
-
-
 class Restaurant(models.Model):
     name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
@@ -51,6 +45,7 @@ class BusinessInfo(models.Model):
     phone_number = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
 
+
 #
 # class Business(models.Model):
 #     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -60,7 +55,6 @@ class BusinessInfo(models.Model):
 class ReviewLike(models.Model):
     review = models.ForeignKey(Review, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    type = EnumField(LikeType, max_length=255)
 
     class Meta:
         unique_together = (("review", "user"),)

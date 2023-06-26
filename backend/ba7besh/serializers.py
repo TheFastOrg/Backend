@@ -2,12 +2,9 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from enumfields import EnumField
-from .models import Restaurant, Review, BusinessInfo, Business, ReviewLike, LikeType
+from .models import Restaurant, Review, BusinessInfo, Business, ReviewLike
 from enum import Enum
 
-class LikeTypeField(EnumField):
-    def to_representation(self, value):
-        return value.value
 
 class RestaurantSerializer(serializers.ModelSerializer):
     class Meta:
@@ -37,7 +34,6 @@ class BusinessSerializer(serializers.ModelSerializer):
 class ReviewLikeSerializer(serializers.ModelSerializer):
     review = serializers.PrimaryKeyRelatedField(queryset=Review.objects.all())
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
-    type = EnumField(enum=LikeType)
     class Meta:
         model = ReviewLike
-        fields = ('id', 'review', 'user', 'type')
+        fields = ('id', 'review', 'user')
