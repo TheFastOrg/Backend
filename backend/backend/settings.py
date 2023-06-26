@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "ba7besh",
     "rest_framework",
     "rest_framework_gis",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -88,6 +89,20 @@ TEMPLATES = [
         },
     },
 ]
+
+
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Ba7besh API',
+    'DESCRIPTION': 'Ba7besh backend API - for Ba7besh App use only',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
 
 WSGI_APPLICATION = "backend.wsgi.application"
 
