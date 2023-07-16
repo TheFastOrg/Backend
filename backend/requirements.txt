@@ -8,3 +8,4 @@ uritemplate==4.1.1
 djangorestframework-gis==1.0
 django-environ==0.10.0
 drf-spectacular==0.26.3
+drf_social_oauth2==2.1.3
