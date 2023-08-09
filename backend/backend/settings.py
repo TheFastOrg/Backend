@@ -39,9 +39,9 @@ DEBUG = env("DEBUG")
 
 SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["new_domain.com"]
 # trusted origin for aws app runner
-CSRF_TRUSTED_ORIGINS = ["https://irqmnmh6v4.eu-central-1.awsapprunner.com"]
+CSRF_TRUSTED_ORIGINS = ["https://new_domain.com"]
 
 
 # Application definition
@@ -73,6 +73,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "drf_social_oauth2.middleware.SocialAuthExceptionMiddleware",
 ]
 
 ROOT_URLCONF = "backend.urls"
@@ -115,11 +116,12 @@ AUTHENTICATION_BACKENDS = (
     "drf_social_oauth2.backends.DjangoOAuth2",
     # Django
     "django.contrib.auth.backends.ModelBackend",
+    "drf_social_oauth2.backends.DjangoOAuth2",
 )
 
 # Facebook configuration
-SOCIAL_AUTH_FACEBOOK_KEY = os.environ["FACEBOOK_KEY"]
-SOCIAL_AUTH_FACEBOOK_SECRET = os.environ["FACEBOOK_SECRET"]
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ["NEW_FACEBOOK_KEY"]
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ["NEW_FACEBOOK_SECRET"]
 
 
 # Define SOCIAL_AUTH_FACEBOOK_SCOPE to get extra permissions from Facebook.
@@ -128,8 +130,8 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ["email"]
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {"fields": "id, name, email"}
 
 # Google configuration
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ["GOOGLE_KEY"]
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ["GOOGLE_SECRET"]
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ["NEW_GOOGLE_KEY"]
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ["NEW_GOOGLE_SECRET"]
 
 # Define SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE to get extra permissions from Google.
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
