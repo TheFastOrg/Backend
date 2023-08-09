@@ -39,9 +39,9 @@ DEBUG = env("DEBUG")
 
 SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*", "<Your App Domain>"]  # Add your app domain
 # trusted origin for aws app runner
-CSRF_TRUSTED_ORIGINS = ["https://irqmnmh6v4.eu-central-1.awsapprunner.com"]
+CSRF_TRUSTED_ORIGINS = ["https://irqmnmh6v4.eu-central-1.awsapprunner.com", "<Your App Domain>"]  # Add your app domain
 
 
 # Application definition
@@ -73,6 +73,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",  # Add this line
 ]
 
 ROOT_URLCONF = "backend.urls"
@@ -95,15 +96,16 @@ TEMPLATES = [
     },
 ]
 
-
-REST_FRAMEWORK = {
-    # YOUR SETTINGS
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "oauth2_provider.contrib.rest_framework.OAuth2Authentication",  # django-oauth-toolkit >= 1.0.0
-        "drf_social_oauth2.authentication.SocialAuthentication",
-    ),
-}
+MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "drf_social_oauth2.middleware.SocialAuthExceptionMiddleware",  # Add this line
+]
 
 AUTHENTICATION_BACKENDS = (
     # Facebook OAuth2
