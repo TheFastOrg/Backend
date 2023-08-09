@@ -39,9 +39,9 @@ DEBUG = env("DEBUG")
 
 SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = ["*", "<Your App Domain>"]  # Add your app domain
+ALLOWED_HOSTS = ["*", "actual.app.domain"]  # Add your app domain
 # trusted origin for aws app runner
-CSRF_TRUSTED_ORIGINS = ["https://irqmnmh6v4.eu-central-1.awsapprunner.com", "<Your App Domain>"]  # Add your app domain
+CSRF_TRUSTED_ORIGINS = ["https://irqmnmh6v4.eu-central-1.awsapprunner.com", "actual.app.domain"]  # Add your app domain
 
 
 # Application definition
@@ -104,6 +104,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "previous.middleware.if.required",  # Add this line
     "drf_social_oauth2.middleware.SocialAuthExceptionMiddleware",  # Add this line
 ]
 
