@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from allauth.socialaccount.models import get_social_account
 
 from .models import Business
 from .serializers import BusinessSerializer
@@ -17,14 +18,17 @@ class GoogleLoginView(viewsets.ViewSet):
         # Generate the user token using the id_token
         user_token = generate_user_token(id_token)
 
-        # Get the user's email and name from the id_token
-        email = get_email_from_id_token(id_token)
-        name = get_name_from_id_token(id_token)
+        # Get the social account associated with the user
+        social_account = get_social_account(request.user, 'google')
 
-        # Return the user token, email, and name in the response
+        # Get the user's uid and extra_data from the social account
+        uid = social_account.uid
+        extra_data = social_account.extra_data
+
+        # Return the user token, uid, and extra_data in the response
         response_data = {
             'user_token': user_token,
-            'email': email,
-            'name': name
+            'uid': uid,
+            'extra_data': extra_data
         }
         return Response(response_data)
