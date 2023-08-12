@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from allauth.socialaccount.models import get_social_account
+from allauth.socialaccount.models import SocialAccount
 
 from .models import Business
 from .serializers import BusinessSerializer
