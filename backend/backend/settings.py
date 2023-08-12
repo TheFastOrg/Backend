@@ -41,7 +41,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = ["*",]
 # trusted origin for aws app runner
-CSRF_TRUSTED_ORIGINS = ["https://irqmnmh6v4.eu-central-1.awsapprunner.com", "https://localhost:8000"]
+CSRF_TRUSTED_ORIGINS = ["https://irqmnmh6v4.eu-central-1.awsapprunner.com", "https://localhost:8000","https://effective-broccoli-67wjw4jvvx9c4gq6-8000.app.github.dev"]
 
 
 # Application definition
@@ -192,3 +192,5 @@ SOCIALACCOUNT_PROVIDERS = {
         'OAUTH_PKCE_ENABLED': True,
     }
 }
+
+SOCIALACCOUNT_ADAPTER = 'backend.users.adapter.SocialAccountAdapter'
