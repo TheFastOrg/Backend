@@ -21,6 +21,7 @@ from rest_framework.schemas import get_schema_view
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("ba7besh.urls")),
+    path('accounts/', include('allauth.urls')),
     path(r"^api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
     # Optional UI:
